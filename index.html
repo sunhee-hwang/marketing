@@ -52,7 +52,7 @@
             text-shadow: 0 0 8px rgba(230, 197, 132, 0.7);
         }
 
-        /* --- 히어로 섹션 (이미지 배경) --- */
+        /* --- 히어로 섹션 (동영상 배경) --- */
         .hero {
             position: relative;
             height: 100vh;
@@ -61,11 +61,29 @@
             align-items: center;
             text-align: center;
             color: white;
-            /* img01.png를 배경 이미지로 설정 */
-            background-image: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4)), url('img01.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* 패럴랙스 효과 */
+            overflow: hidden;
+        }
+        
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+            z-index: -99;
         }
 
         .hero-text {
@@ -123,8 +141,7 @@
             box-shadow: 0 20px 40px rgba(230, 197, 132, 0.2);
         }
 
-        /* video 태그 스타일을 img 태그로 변경 */
-        .menu-card img {
+        .menu-card video {
             width: 100%;
             height: 350px;
             object-fit: cover;
@@ -165,9 +182,17 @@
             text-align: center;
             padding: 50px;
             overflow: hidden;
-            /* 배경 이미지와 어둡게 처리하는 오버레이를 한 번에 설정 */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img01.png') no-repeat center center;
-            background-size: cover;
+        }
+
+        .story-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.4);
         }
         
         /* --- 갤러리 섹션 --- */
@@ -175,7 +200,7 @@
             columns: 3 250px;
             column-gap: 20px;
         }
-        .gallery-grid img {
+        .gallery-grid video {
             width: 100%;
             margin-bottom: 20px;
             border-radius: 10px;
@@ -206,6 +231,10 @@
     </header>
 
     <section id="home" class="hero">
+        <video id="bg-video" autoplay muted loop playsinline preload="auto">
+            <source src="vid01.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
         <div class="hero-text">
             <h1>눈꽃처럼 피어나는 맛의 향연</h1>
             <p>최고의 재료가 선사하는 미식의 절정, 설화담입니다.</p>
@@ -216,21 +245,21 @@
         <h2 class="section-title">설화담의 특별 메뉴</h2>
         <div class="menu-grid">
             <div class="menu-card">
-                <img src="img01.png" alt="샤브샤브 대표 이미지 1">
+                <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
                 <div class="menu-info">
                     <h3>한우 설화 꽃등심</h3>
                     <p>눈꽃 같은 마블링이 입안에서 부드럽게 녹아내리는 최상급 한우 꽃등심입니다. 설화담의 자부심을 느껴보세요.</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="img01.png" alt="샤브샤브 대표 이미지 2">
+                <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
                 <div class="menu-info">
                     <h3>완도 활전복 해물</h3>
                     <p>매일 아침 완도에서 직송한 싱싱한 활전복과 제철 해산물이 어우러져 깊고 시원한 바다의 맛을 선사합니다.</p>
                 </div>
             </div>
             <div class="menu-card">
-                <img src="img01.png" alt="샤브샤브 대표 이미지 3">
+                <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
                 <div class="menu-info">
                     <h3>자연송이 모둠 버섯</h3>
                     <p>진한 향의 자연송이를 비롯한 7가지 귀한 버섯이 육수의 풍미를 한층 더 깊게 만들어주는 건강 메뉴입니다.</p>
@@ -241,6 +270,7 @@
     
     <section id="story" class="story-section">
         <div class="story-container">
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
             <h2 class="section-title">재료 본연의 맛을 담다</h2>
             <p style="font-size: 1.2em; line-height: 1.8;">설화담은 화려한 기교보다 정직한 재료에 집중합니다.<br>
             열두 시간 정성으로 우려낸 채수와 엄선된 최상급의 식재료, <br>
@@ -251,11 +281,11 @@
     <section id="gallery" class="section">
         <h2 class="section-title">맛의 순간들</h2>
         <div class="gallery-grid">
-            <img src="img01.png" alt="갤러리 이미지 1">
-            <img src="img01.png" alt="갤러리 이미지 2">
-            <img src="img01.png" alt="갤러리 이미지 3">
-            <img src="img01.png" alt="갤러리 이미지 4">
-            <img src="img01.png" alt="갤러리 이미지 5">
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid01.mp4" type="video/mp4"></video>
         </div>
     </section>
 
