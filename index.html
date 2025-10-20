@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>설화담 (雪花談) - 눈꽃처럼 피어나는 맛의 이야기</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Noto+Serif+KR:wght@300;400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Noto Serif KR', serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        /* --- 헤더 --- */
+        .header {
+            background: rgba(15, 15, 15, 0.8);
+            padding: 20px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #e6c584; /* 차분한 골드 색상 */
+            text-shadow: 2px 2px 10px rgba(230, 197, 132, 0.5);
+        }
+
+        .nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.1em;
+            font-weight: 300;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav a:hover {
+            color: #e6c584;
+            text-shadow: 0 0 8px rgba(230, 197, 132, 0.7);
+        }
+
+        /* --- 히어로 섹션 (동영상 배경) --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+            z-index: -99;
+        }
+
+        .hero-text {
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5em;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-top: 20px;
+        }
+        
+        /* --- 공통 섹션 스타일 --- */
+        .section {
+            padding: 100px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            color: #e6c584;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* --- 메뉴 소개 섹션 --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+
+        .menu-card {
+            background: #2b2b2b;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(230, 197, 132, 0.2);
+        }
+
+        .menu-card video {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+        
+        .menu-info {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .menu-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #e6c584;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .menu-info p {
+            font-weight: 300;
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+        
+        /* --- 철학 섹션 --- */
+        .story-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .story-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: relative;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+        }
+
+        .story-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.4);
+        }
+        
+        /* --- 갤러리 섹션 --- */
+        .gallery-grid {
+            columns: 3 250px;
+            column-gap: 20px;
+        }
+        .gallery-grid video {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        /* --- 푸터 --- */
+        .footer {
+            background: #111;
+            color: #aaa;
+            padding: 50px;
+            text-align: center;
+            font-weight: 300;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">설화담</div>
+        <nav class="nav">
+            <a href="#home">첫 화면</a>
+            <a href="#menu">메인 메뉴</a>
+            <a href="#story">우리의 철학</a>
+            <a href="#gallery">맛의 순간들</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <video id="bg-video" autoplay muted loop playsinline preload="auto">
+            <source src="vid01.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-text">
+            <h1>눈꽃처럼 피어나는 맛의 향연</h1>
+            <p>최고의 재료가 선사하는 미식의 절정, 설화담입니다.</p>
+        </div>
+    </section>
+
+    <section id="menu" class="section">
+        <h2 class="section-title">설화담의 특별 메뉴</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <video autoplay muted loop playsinline preload="none"><source src="vid02.mp4" type="video/mp4"></video>
+                <div class="menu-info">
+                    <h3>한우 설화 꽃등심</h3>
+                    <p>눈꽃 같은 마블링이 입안에서 부드럽게 녹아내리는 최상급 한우 꽃등심입니다. 설화담의 자부심을 느껴보세요.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <video autoplay muted loop playsinline preload="none"><source src="vid03.mp4" type="video/mp4"></video>
+                <div class="menu-info">
+                    <h3>완도 활전복 해물</h3>
+                    <p>매일 아침 완도에서 직송한 싱싱한 활전복과 제철 해산물이 어우러져 깊고 시원한 바다의 맛을 선사합니다.</p>
+                </div>
+            </div>
+            <div class="menu-card">
+                <video autoplay muted loop playsinline preload="none"><source src="vid04.mp4" type="video/mp4"></video>
+                <div class="menu-info">
+                    <h3>자연송이 모둠 버섯</h3>
+                    <p>진한 향의 자연송이를 비롯한 7가지 귀한 버섯이 육수의 풍미를 한층 더 깊게 만들어주는 건강 메뉴입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="story" class="story-section">
+        <div class="story-container">
+            <video autoplay muted loop playsinline preload="none"><source src="vid05.mp4" type="video/mp4"></video>
+            <h2 class="section-title">재료 본연의 맛을 담다</h2>
+            <p style="font-size: 1.2em; line-height: 1.8;">설화담은 화려한 기교보다 정직한 재료에 집중합니다.<br>
+            열두 시간 정성으로 우려낸 채수와 엄선된 최상급의 식재료, <br>
+            그 본연의 맛이 어우러지는 순간이야말로 최고의 요리라고 믿습니다.</p>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <h2 class="section-title">맛의 순간들</h2>
+        <div class="gallery-grid">
+            <video autoplay muted loop playsinline preload="none"><source src="vid06.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid07.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid08.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid09.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline preload="none"><source src="vid10.mp4" type="video/mp4"></video>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>프리미엄 샤브샤브 설화담(雪花談)</p>
+        <p>주소: 서울특별시 강남구 도산대로 123, 4층 | 예약문의: 02-1234-5678</p>
+        <p>&copy; 2025 Seolhwadam. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
